@@ -35,7 +35,7 @@ class Cell:
             case "water":
                 self.multiplier = math.inf
             case "desert":
-                self.multiplier = 1.5
+                self.multiplier = 1
             case "forest":
                 self.multiplier = 2
             case "hills":
@@ -102,6 +102,15 @@ class Map:
                     # Pick cell type based on color
                     self.grid[x][y] = Cell(x, y, color)
                     # print(cell.fill.start_color.index)
+
+    def get_neighbors(self, cell):
+        """Return the neighboring cells for a given cell."""
+        neighbors = []
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            x, y = cell.x + dx, cell.y + dy
+            if 0 <= x < self.size and 0 <= y < self.size and self.grid[x][y] is not None:
+                neighbors.append(self.grid[x][y])
+        return neighbors
 
 
 if __name__ == "__main__":
